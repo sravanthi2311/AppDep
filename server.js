@@ -6,6 +6,8 @@ const cors=require("cors");
 
 const multer=require("multer");
 
+const path=require("path");
+
 const storage = multer.diskStorage({
     destination:  (req, file, cb) =>{
       cb(null, "profilePics")
@@ -25,6 +27,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use("/profilePics",express.static("profilePics"));
+app.use(express.static(path.join(__dirname,"./client/build")));
+
+app.get("*",(req,res)=>{
+    res.sendFile("./client/buildindex.html");
+})
 
 app.post("/signup",upload.single("profilePic"),async(req,res)=>{
     console.log(req.file);
