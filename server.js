@@ -30,7 +30,7 @@ app.use("/profilePics",express.static("profilePics"));
 app.use(express.static(path.join(__dirname,"./client/build")));
 
 app.get("*",(req,res)=>{
-    res.sendFile("./client/buildindex.html");
+    res.sendFile("./client/build/index.html");
 })
 
 app.post("/signup",upload.single("profilePic"),async(req,res)=>{
